@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react'; // Import useState and useEffect from 'react'
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import WelcomeScreen from "./Screens/Restaurant/WelcomeScreen";
@@ -8,7 +9,6 @@ import Login from "./app/screens/Login";
 import List from "./app/screens/List";
 import Details from "./app/screens/Details";
 import { User, onAuthStateChanged } from "firebase/auth";
-import { useEffect } from "react";
 import { FIREBASE_AUTH } from "./FirebaseConfig";
 
 const Stack = createStackNavigator();
@@ -23,7 +23,7 @@ function InsideLayout() {
   );
 }
 function App() {
-  const [user, setUser] = (useState < User) | (null > null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     onAuthStateChanged(FIREBASE_AUTH, (user) => {
