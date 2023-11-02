@@ -6,24 +6,26 @@ import HomeScreen from "./Screens/Restaurant/HomeScreen";
 import Subway from "./Screens/Restaurant/Subway";
 import LoginScreen from "./Screens/Restaurant/Login";
 import Login from "./app/screens/Login";
-import List from "./app/screens/List";
-import Details from "./app/screens/Details";
-import { User, onAuthStateChanged } from "firebase/auth";
+//import List from "./app/screens/List";
+//import Details from "./app/screens/Details";
+import { onAuthStateChanged } from "firebase/auth";
+import { User } from "firebase/auth";
 import { FIREBASE_AUTH } from "./FirebaseConfig";
 
 const Stack = createStackNavigator();
 const InsideStack = createStackNavigator();
 
-function InsideLayout() {
+/*function InsideLayout() {
   return (
     <InsideStack.Navigator>
       <InsideStack.Screen name="My todos" component={List} />
       <InsideStack.Screen name="details" component={Details} />
     </InsideStack.Navigator>
   );
-}
-function App() {
-  const [user, setUser] = useState<User | null>(null);
+}*/
+function App() { 
+   const [user, setUser] = useState<User | null>(null); 
+
 
   useEffect(() => {
     onAuthStateChanged(FIREBASE_AUTH, (user) => {

@@ -1,4 +1,4 @@
-import {View, Text, Button} from 'react-native'
+/*import {View, Text, Button} from 'react-native'
 import React from 'react'
 import { FIREBASE_AUTH } from '../../FirebaseConfig'
 import { NavigationProp } from '@react-navigation/native'
@@ -15,4 +15,4 @@ const List = ({navigation} : RouterProps) => {
     )
 }
 
-export default List
+export default List*/
