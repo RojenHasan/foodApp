@@ -4,35 +4,19 @@ import { createStackNavigator } from "@react-navigation/stack";
 import WelcomeScreen from "./Screens/Restaurant/WelcomeScreen";
 import HomeScreen from "./Screens/Restaurant/HomeScreen";
 import Subway from "./Screens/Restaurant/Subway";
-import LoginScreen from "./Screens/Restaurant/Login";
-import Login from "./app/screens/Login";
+import Login from "./Screens/Restaurant/Login";
 //import List from "./app/screens/List";
 //import Details from "./app/screens/Details";
 import { onAuthStateChanged } from "firebase/auth";
-import { User } from "firebase/auth";
-import { FIREBASE_AUTH } from "./FirebaseConfig";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Logout from './Screens/Restaurant/Logout';
 
-const Stack = createStackNavigator();
-const InsideStack = createStackNavigator();
 
-/*function InsideLayout() {
-  return (
-    <InsideStack.Navigator>
-      <InsideStack.Screen name="My todos" component={List} />
-      <InsideStack.Screen name="details" component={Details} />
-    </InsideStack.Navigator>
-  );
-}*/
+
+const Stack = createNativeStackNavigator();
+
 function App() { 
-   const [user, setUser] = useState<User | null>(null); 
-
-
-  useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      console.log("user", user);
-      setUser(user);
-    });
-  }, []);
+  
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Welcome">
@@ -40,6 +24,7 @@ function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Subway" component={Subway} />
+        <Stack.Screen name="Logout" component={Logout} />
       </Stack.Navigator>
     </NavigationContainer>
   );

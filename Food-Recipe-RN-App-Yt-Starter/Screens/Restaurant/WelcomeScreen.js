@@ -6,20 +6,44 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import { signOut } from 'firebase/auth'; // Import the signOut function from Firebase Authentication
 import colors from "../../config/Restaurant/colors";
 import SPACING from "../../config/SPACING";
+import { getAuth } from 'firebase/auth'; // Import the getAuth function to get the auth object
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+
+  const userEmail = route.params?.userEmail;
 
   const navigateToHome = () => {
     navigation.navigate("Home");
   };
 
   const navigateToLogin = () => {
-    navigation.navigate("Login");
+    if (userEmail) {
+      clearUserData();
+    } else {
+      navigation.navigate("Login");
+    }
   };
+
+  const clearUserData = () => {
+    const auth = getAuth(); // Get the auth object
+    signOut(auth) // Sign out the user using the auth object
+      .then(() => {
+        // Successfully signed out
+        // You can also clear user data from other sources like AsyncStorage here
+        navigation.navigate("Logout"); // Navigate to the Logout screen or any other appropriate screen
+      })
+      .catch((error) => {
+        // Handle sign-out error
+        console.error(error);
+      });
+  };
+
   return (
     <ImageBackground
       style={{ flex: 1 }}
@@ -57,6 +81,17 @@ const WelcomeScreen = () => {
           >
             Good food, Good mood!
           </Text>
+          {userEmail && (
+            <Text
+              style={{
+                color: colors.white,
+                fontSize: SPACING * 2,
+                marginTop: SPACING * 2,
+              }}
+            >
+              Welcome, {userEmail}!
+            </Text>
+          )}
           <TouchableOpacity
             style={{
               padding: SPACING * 2,
@@ -94,7 +129,7 @@ const WelcomeScreen = () => {
                 fontWeight: "700",
               }}
             >
-              Login
+              {userEmail ? "Log Out" : "Login"}
             </Text>
           </TouchableOpacity>
         </View>
